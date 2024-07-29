@@ -1,0 +1,4 @@
+module(name = "args_test")
+
+bazel_dep(name = "args")
+local_path_override(module_name = "args", path = "..")

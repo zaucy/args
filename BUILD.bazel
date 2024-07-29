@@ -1,0 +1,29 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+
+# This is only necessary for <args.hxx> include style
+copy_file(
+    name = "copy_args_header",
+    src = "args.hxx",
+    out = "include/args.hxx",
+)
+
+cc_library(
+    name = "args_internal",
+    hdrs = ["args.hxx"],
+)
+
+cc_library(
+    name = "args",
+    visibility = ["//visibility:public"],
+    includes = ["include"],
+    strip_include_prefix = "include",
+    hdrs = [":copy_args_header"],
+    deps = [":args_internal"],
+)
+
+cc_test(
+    name = "test",
+    srcs = ["test.cxx", "catch.hpp"],
+    deps = [":args_internal"],
+)

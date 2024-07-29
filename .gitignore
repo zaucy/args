@@ -52,3 +52,7 @@ gitlike
 /buck-out/
 /.buckd/
 .buckconfig.local
+
+# Bazel
+bazel-*
+*.bazel.lock

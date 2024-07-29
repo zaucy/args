@@ -1,0 +1,17 @@
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
+cc_test(
+    name = "multiple_inclusion",
+    srcs = [
+        "multiple_inclusion_1.cxx",
+        "multiple_inclusion_2.cxx",
+    ],
+    deps = ["@args"],
+)
+
+cc_test(
+    name = "windows_header_test",
+    srcs = ["windows_h.cxx"],
+    deps = ["@args"],
+    target_compatible_with = ["@platforms//os:windows"],
+)
